@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 public class CreateUserSteps {
 
@@ -32,12 +33,23 @@ public class CreateUserSteps {
 
         String payload = mainResponseStorage.getPayload();
 
+        String token = mainResponseStorage.getBearerToken();
+
+        System.out.println("Token recebido no create user: " + token);
+
+        if (token == null || token.isBlank()) {
+            throw new IllegalStateException(
+                    "O token não está disponível no MainResponseStorage."
+            );
+        }
+
         Response response =
                given()
                     .baseUri(baseUrl)
                     .contentType(ContentType.JSON)
                     .accept(ContentType.JSON)
-                    .header("Authorization", "Bearer " + mainResponseStorage.getBearerToken())
+                    .auth()
+                    .oauth2(token)
                     .body(payload)
                     .log().all()
                 .when()
@@ -65,27 +77,36 @@ public class CreateUserSteps {
 
     @And("the response should contain the created user id")
     public void theResponseShouldContainTheCreatedUserId() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        mainResponseStorage
+             .getResponse()
+             .then()
+             .body("id", notNullValue())
+             .body("id", greaterThan(0));
     }
 
     @And("the response should contain the correct user name")
     public void theResponseShouldContainTheCorrectUserName() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        mainResponseStorage
+                .getResponse()
+                .then()
+                .body("name", notNullValue())
+                .body("name", greaterThan(""));
     }
 
     @And("the response should contain the correct user email")
     public void theResponseShouldContainTheCorrectUserEmail() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        mainResponseStorage
+                .getResponse()
+                .then()
+                .body("email", notNullValue())
+                .body("email", greaterThan(""));
     }
 
     @And("the response should no contain the password")
     public void theResponseShouldNoContainThePassword() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        mainResponseStorage
+                .getResponse()
+                .then()
+                .body("$", not(hasKey("password")));
     }
-
-
 }
