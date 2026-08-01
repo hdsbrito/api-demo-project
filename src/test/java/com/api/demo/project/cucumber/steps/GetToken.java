@@ -49,10 +49,6 @@ public class GetToken {
         if(response.statusCode() >= 200 && response.statusCode() < 300) {
             String token = response.jsonPath().getString("token");
             mainResponseStorage.setBearerToken(token);
-
-            System.out.println(
-                    "Token armazenado: " + mainResponseStorage.getBearerToken()
-            );
         }
     }
 

@@ -19,7 +19,7 @@ public class MainResponseStorage {
     // You can then use it like "mainResponseStorage.getBearerToken()"
     private String bearerToken;
     private String payload;
-    private String userId;
+    private Integer userId;
     private Response response;
     
     public String getPayload() {
@@ -37,11 +37,11 @@ public class MainResponseStorage {
         this.bearerToken = token;
     }
     
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
     
-    public void setUserId(String userId){
+    public void setUserId(Integer userId){
         this.userId = userId;
     }
     

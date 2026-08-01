@@ -63,7 +63,6 @@ public class CreateUserSteps {
 
         if(response.statusCode() >= 200 && response.statusCode() < 300) {
             String userId = response.jsonPath().getString("id");
-            mainResponseStorage.setUserId(userId);
         }
     }
 
