@@ -1,7 +1,11 @@
 package com.api.demo.project.storage;
 
 import com.api.demo.project.annotation.LazyComponent;
+import groovy.lang.GString;
+import io.restassured.response.Response;
 import lombok.Data;
+import lombok.Getter;
+import org.springframework.stereotype.Component;
 
 /**
  * Singleton storage component used to temporarily hold data
@@ -16,4 +20,36 @@ public class MainResponseStorage {
     private String bearerToken;
     private String payload;
     private String userId;
+    private Response response;
+    
+    public String getPayload() {
+        return payload;
+    }
+    
+    public void setPayload(String payload) {
+        this.payload = payload;
+    }
+    public String getBearerToken() {
+        return bearerToken;
+    }
+    
+    public void setBearerToken(String token) {
+        this.bearerToken = token;
+    }
+    
+    public String getUserId() {
+        return userId;
+    }
+    
+    public void setUserId(String userId){
+        this.userId = userId;
+    }
+    
+    public Response getResponse() {
+        return response;
+    }
+    public void setResponse(Response response) {
+        this.response = response;
+    }
+    
 }
