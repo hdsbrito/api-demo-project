@@ -2,7 +2,9 @@ package com.api.demo.project.cucumber.steps;
 
 import com.api.demo.project.helpers.PayloadBuilder;
 import com.api.demo.project.storage.MainResponseStorage;
+import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MainSteps {
