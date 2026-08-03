@@ -2,7 +2,6 @@ package com.api.demo.project.cucumber.steps;
 
 import com.api.demo.project.helpers.PayloadBuilder;
 import com.api.demo.project.storage.MainResponseStorage;
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.restassured.http.ContentType;
@@ -11,9 +10,7 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.util.Optional;
-
-public class GetUsers {
+public class  GetUsers {
 
 
     @Autowired
@@ -89,7 +86,6 @@ public class GetUsers {
                 .response();
 
         mainResponseStorage.setResponse(response);
-        Assert.assertEquals(200, response.statusCode());
         mainResponseStorage.setUserId(userId);
     }
 

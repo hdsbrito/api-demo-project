@@ -2,9 +2,13 @@ package com.api.demo.project.cucumber.steps;
 
 import com.api.demo.project.helpers.PayloadBuilder;
 import com.api.demo.project.storage.MainResponseStorage;
+import io.cucumber.java.PendingException;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import net.datafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
+import io.restassured.path.json.JsonPath;
 
 import java.util.UUID;
 
@@ -26,6 +30,12 @@ public class MainSteps {
 
         // Here I am storing the payload for future use
         mainResponseStorage.setPayload(payload);
+
+        String name = JsonPath.from(payload).getString("name");
+
+        if(name != null && !name.isBlank()) {
+            mainResponseStorage.setExpectedUserName(name);
+        }
     }
 
     private String replaceDynamicValues(String payload) {

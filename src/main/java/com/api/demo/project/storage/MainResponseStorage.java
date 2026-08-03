@@ -21,6 +21,7 @@ public class MainResponseStorage {
     private String payload;
     private Integer userId;
     private Response response;
+    private String expectedUserName;
     
     public String getPayload() {
         return payload;
@@ -50,6 +51,14 @@ public class MainResponseStorage {
     }
     public void setResponse(Response response) {
         this.response = response;
+    }
+
+    public String getExpectedUserName() {
+        return expectedUserName;
+    }
+
+    public void setExpectedUserName(String expectedUserName) {
+        this.expectedUserName = expectedUserName;
     }
     
 }
